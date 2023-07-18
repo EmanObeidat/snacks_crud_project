@@ -24,38 +24,38 @@ class Snacktest(TestCase) :
         self.assertEqual(str(self.snack), expected_string)
 
     def test_list_view(self):
-        response = self.client.get(reverse("snack_list"))
+        response = self.client.get(reverse("snacks_list"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "snack_list.html")
+        self.assertTemplateUsed(response, "snacks_list.html")
 
     def test_detail_view(self):
-            url = reverse('snack_detail',args=[self.snack.id])  
+            url = reverse('snacks_detail',args=[self.snack.id])  
             response = self.client.get(url)
 
             self.assertEqual(response.status_code,200)
-            self.assertTemplateUsed(response,'snack_detail.html')
+            self.assertTemplateUsed(response,'snacks_detail.html')
 
 
     def test_create_view(self):
-        url = reverse('snack_create')
+        url = reverse('snacks_create')
         data={
             "name": "test_2",
             "purchaser" : self.user.id,
-            "desc": 'test_02'
+            "description": 'test_02'
         }
 
 
         response = self.client.post(path=url,data = data,follow = True)
-        self.assertTemplateUsed(response,'snack_detail.html')
+        self.assertTemplateUsed(response,'snacks_detail.html')
         self.assertEqual(len(Snack.objects.all()),2)
-        self.assertRedirects(response, reverse('snack_detail',args=[2]))
+        self.assertRedirects(response, reverse('snacks_detail',args=[2]))
 
     def test_update_view(self):
        
         response = self.client.post(reverse('snack_update',args="1"),
-                    {"name": "Updated name", "desc": "description", "purchaser": self.user.id})
+                    {"name": "Updated name", "description": "description", "purchaser": self.user.id})
         
-        self.assertRedirects(response, reverse('snack_list'))
+        self.assertRedirects(response, reverse('snacks_list'))
 
     def test_snack_delete_view(self):
         response = self.client.get(reverse("snack_delete", args="1"))

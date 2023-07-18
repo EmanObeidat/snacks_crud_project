@@ -2,11 +2,13 @@
 
 {% block content%}
 
-<h1>Snacks List</h1>
+<h1>Create new Snacks List</h1>
 <form  method="post">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit">
 
 </form>
+<br>
+<a href="{% url 'home'%}">Back to home</a>
 {% endblock%}

@@ -6,7 +6,7 @@ class Snack(models.Model):
     title = models.CharField(max_length=255)
     purchaser = models.CharField(max_length=255)
     description = models.TextField()
-    reviewer=models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
+    reviewer=models.ForeignKey(get_user_model(),on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return self.title

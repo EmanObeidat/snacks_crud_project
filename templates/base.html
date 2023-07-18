@@ -1,14 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title%} {% endblock %} </title>
-    <link rel="stylesheet" href="">
-</head>
-<body>
-    {% block content%}
-    {% endblock%}
-
-</body>
+<html>
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <title>{% block title%} {% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <style>
+            /* Add custom styles here */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: aliceblue;
+            }
+            
+            nav {
+                background-color: #4a3c3c;
+                color: #fff;
+                padding: 10px;
+            }
+            
+            nav li {
+                display: inline;
+                margin-right: 10px;
+            }
+            
+            nav a {
+                color: #fff;
+                text-decoration: none;
+            }
+            
+            main {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href='{% url "home" %}'>Home</a></li>
+                <li><a href='{% url "snack_create" %}'> new snack</a></li>
+                {% block nav %}
+                {% endblock %}
+            </ul>
+        </nav>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
 </html>
